@@ -69,7 +69,7 @@ img { max-width: 100%; display: block; }
 .eyebrow { display: inline-flex; gap: 8px; align-items: center; font-size: 14px; color: var(--text-2);
   padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,.7); box-shadow: inset 0 0 0 1px var(--hairline); }
 .eyebrow b { color: var(--accent); font-weight: 600; }
-.hero h1 { font-size: clamp(38px, 6vw, 64px); line-height: 1.05; letter-spacing: -.025em; margin: 22px auto 18px; max-width: 900px; }
+.hero h1 { font-size: clamp(38px, 6vw, 64px); line-height: 1.05; letter-spacing: -.025em; margin: 22px auto 18px; max-width: 1040px; }
 .hero .lead { font-size: clamp(18px, 2.2vw, 21px); color: var(--text-2); max-width: 720px; margin: 0 auto 30px; }
 .hero .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 .hero-stage { margin-top: 52px; }
