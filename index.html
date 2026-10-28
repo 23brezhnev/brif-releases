@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Бриф — записывает созвоны и делает выжимку с задачами · macOS</title>
+<meta name="description" content="Приложение для Mac: записывает созвон, расшифровывает его на компьютере, делит по голосам и собирает выжимку с задачами. Звук не покидает Mac.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Бриф — выжимка и задачи после каждого созвона">
+<meta property="og:description" content="Записывает созвон, расшифровывает на вашем Mac, делит по голосам и собирает договорённости. Сейчас бесплатно.">
+<meta property="og:image" content="https://23brezhnev.github.io/brif-releases/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://23brezhnev.github.io/brif-releases/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/icon.png">
+<link rel="stylesheet" href="styles.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#"><img src="assets/icon.png" alt="">Бриф</a>
+    <nav class="topnav">
+      <a href="#after">После встречи</a>
+      <a href="#privacy">Приватность</a>
+      <a href="#voice">Встреча голосом</a>
+      <a href="#install">Установка</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <a class="btn small mac-only" data-download href="https://github.com/23brezhnev/brif-releases/releases/latest">Скачать</a>
+  </div>
+</header>
+
+<main>
+
+<!-- 1. Первый экран -->
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow"><span>Приложение для macOS</span><span>·</span><b>сейчас бесплатно</b></span>
+    <h1>Записывает созвоны и собирает из них выжимку с задачами</h1>
+    <p class="lead">Бриф пишет звук звонка и ваш микрофон, расшифровывает разговор на вашем Mac, делит его по голосам и выписывает договорённости. Звук никуда не уходит: модели для выжимки отправляется только текст.</p>
+    <div class="cta">
+      <a class="btn mac-only" data-download href="https://github.com/23brezhnev/brif-releases/releases/latest">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>
+        Скачать для Mac
+      </a>
+      <a class="btn ghost mac-only" href="#install">Как установить</a>
+      <div class="not-mac" hidden>
+        <p class="btn-note" style="margin:0 0 12px"><b>Бриф работает на Mac.</b> Откройте эту страницу на компьютере, чтобы скачать.</p>
+        <button class="btn" type="button" data-copy>Скопировать ссылку</button>
+      </div>
+    </div>
+    <p class="btn-note mac-only">macOS 14 или новее · Mac на Apple Silicon (M1 и новее) · <span data-version>dmg из последнего выпуска</span></p>
+
+    <div class="hero-stage">
+      <div class="scene-tabs" id="hero-tabs" role="tablist" aria-label="Сцены демонстрации">
+        <button type="button">Запись<i class="prog"></i></button>
+        <button type="button">Обработка<i class="prog"></i></button>
+        <button type="button">Выжимка<i class="prog"></i></button>
+        <button type="button">Голоса<i class="prog"></i></button>
+        <button type="button">Вопрос к встрече<i class="prog"></i></button>
+      </div>
+
+      <div class="mac reveal in" id="hero-window" role="img" aria-label="Окно Брифа: запись встречи с живой расшифровкой, обработка, выжимка с блоком «Действия», переименование спикера и вопрос к встрече">
+        <div class="lights"><i></i><i></i><i></i></div>
+        <div class="body">
+          <aside class="side">
+            <div class="col-title"><b>Встречи</b><span class="plus">+</span></div>
+            <div class="strip" hidden><span class="rd"></span><span class="clock">31:00</span><span class="lvl"></span><span class="pause">❚❚</span><span class="stop"></span></div>
+            <div class="searchbox"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>Поиск: текст, участник, #тег<svg class="ico f" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8 10h8M9.5 13.5h5"/></svg></div>
+            <div class="grow">
+              <div class="group">Ближайшие</div>
+              <div class="row"><div class="l1"><span class="t">Ретро команды</span><span class="time">16:00</span></div><div class="l2"><span class="m">Яндекс Телемост · 4 участника</span></div></div>
+              <div class="group">Сегодня</div>
+              <div class="row sel"><div class="l1"><span class="t">Запуск лендинга</span><span class="time">11:00</span></div><div class="l2"><span class="m" data-row-meta>32 мин · Анна, Иван +1 · #сайт</span><span class="pill" data-row-pill hidden></span></div></div>
+              <div class="row"><div class="l1"><span class="t">1:1 с Анной</span><span class="time">09:30</span></div><div class="l2"><span class="m">25 мин · Анна Котова</span></div></div>
+              <div class="group">На этой неделе</div>
+              <div class="row"><div class="l1"><span class="t">Интервью с клиентом</span><span class="time">27 окт.</span></div><div class="l2"><span class="m">48 мин · Олег Смирнов · #исследование</span></div></div>
+              <div class="row"><div class="l1"><span class="t">Бюджет на ноябрь</span><span class="time">26 окт.</span></div><div class="l2"><span class="m">40 мин · Иван Петров</span></div></div>
+            </div>
+            <div class="sectionbar">
+              <span class="on" title="Встречи"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 11v2M8 8v8M12 5v14M16 8v8M20 11v2"/></svg></span>
+              <span title="Задачи"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="7" r="1.6"/><path d="m3.5 15.5 1.5 1.5 2.5-3M10 7h10M10 16h10"/></svg><i class="badge">3</i></span>
+              <span title="Теги"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 4 8 20M16 4l-2 16M5 9h15M4 15h15"/></svg></span>
+              <span title="Люди"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="3.3"/><path d="M3 19c.7-3.2 3.1-5 6-5s5.3 1.8 6 5M16 5a3.2 3.2 0 0 1 0 6M17.5 14c1.9.6 3 2.3 3.5 5"/></svg></span>
+              <i class="stat" title="Модель распознавания готова"></i>
+              <span class="gear" title="Настройки"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg></span>
+            </div>
+          </aside>
+          <div class="sheet">
+            <div class="mh">
+              <span class="more">···</span>
+              <h4>Запуск лендинга</h4>
+              <div class="meta" data-meta><span>28 октября 2026, 11:00</span><span class="sep">·</span><span>32 мин</span><span class="tagpill"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8" r="1.3"/></svg>#сайт</span></div>
+              <div class="people" data-people>
+                <span class="person sp"><i class="d" style="background:var(--sp1)"></i>Вы</span>
+                <span class="person sp"><i class="d" style="background:var(--sp2)"></i>Анна Котова</span>
+                <span class="person sp"><i class="d" style="background:var(--sp4)"></i>Иван Петров</span>
+                <span class="add">+</span>
+              </div>
+              <div class="player" data-player><span class="play"></span><span>00:00</span><span class="track"></span><span>32:10</span></div>
+              <div class="tabs">
+                <span data-tab="summary" class="on"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="M7 9.5h10M7 13h6"/></svg>Выжимка<i class="cnt" data-cnt>2</i></span>
+                <span data-tab="notes"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20h4L19 9l-4-4L4 16zM14 6l4 4"/></svg>Заметки</span>
+                <span data-tab="transcript"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10v4M8 7v10M12 4v16M16 7v10M20 10v4"/></svg>Стенограмма</span>
+                <span class="share"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M8 7l4-4 4 4M6 11H5v10h14V11h-1"/></svg>Поделиться</span>
+              </div>
+              <div class="ask" data-ask><span class="spark">✦</span><span class="q">Спросить о встрече: о чём договорились, кто отвечает за…</span></div>
+              <div class="hr"></div>
+            </div>
+            <div class="content">
+              <div class="actions"><h6>Действия</h6>
+                <div class="act ok"><span class="box"></span><div><span class="tt">Подготовить тексты для лендинга</span><span class="mm">· пт, 30 окт. · Вы</span> <span class="cite">05:52</span></div><div class="btns"></div></div>
+                <div class="act ok"><span class="box"></span><div><span class="tt">Сдать макеты лендинга</span><span class="mm">· чт, 29 окт. · Анна Котова <span class="tg">#сайт</span></span> <span class="cite">04:12</span></div><div class="btns"></div></div>
+              </div>
+              <div class="md"><p>Запуск лендинга назначили на вторник, 3 ноября. Макеты Анна сдаёт к четвергу, вёрстка займёт ещё два дня. Рекламу Иван запускает сразу после релиза, бюджет — 150 000 ₽. <span class="cite">05:40</span></p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="caption" id="hero-caption" aria-live="polite">Созвон закончился — выжимка, задачи и стенограмма уже в окне встречи.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Ситуация -->
+<section class="block tight">
+  <div class="wrap center">
+    <div class="kicker">Знакомо?</div>
+    <h2>Созвон кончился. О чём договорились?</h2>
+    <div class="pains">
+      <div class="pain reveal"><div class="q">Сроки и цифры теряются</div><p>Через час помните общий смысл, а дату релиза и сумму бюджета — уже нет.</p></div>
+      <div class="pain reveal"><div class="q">Задачи остаются в разговоре</div><p>«Я посмотрю», «давай к пятнице» — никто не записал, кто и к какому числу.</p></div>
+      <div class="pain reveal"><div class="q">Или слушать, или записывать</div><p>Пока ведёте конспект, теряете нить разговора. Пока говорите — ничего не записано.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Путь встречи -->
+<section class="block tight">
+  <div class="wrap">
+    <div class="center"><div class="kicker">Как это работает</div><h2>Одна встреча с Брифом</h2></div>
+    <div class="steps">
+      <div class="step reveal"><b>До</b><span>Ближайшие события календаря — над списком встреч. В карточке события — заметки к повестке и открытые задачи с каждым участником.</span></div>
+      <div class="step reveal"><b>Во время</b><span>Нажали «Новая запись» или кнопку в уведомлении о начале встречи. Бриф пишет звук звонка и микрофон и показывает живой черновик.</span></div>
+      <div class="step reveal"><b>После</b><span>Расшифровка целиком, деление по голосам, выжимка по темам и задачи в блоке «Действия».</span></div>
+      <div class="step reveal"><b>Потом</b><span>Поиск по встречам, вопрос к встрече, задачи с напоминаниями — на Mac и на iPhone.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. После встречи -->
+<section class="block" id="after">
+  <div class="wrap split">
+    <div class="copy reveal">
+      <div class="kicker">После встречи</div>
+      <h2>Выжимка с цифрами, сроками и задачами</h2>
+      <p class="sub">Встреча открывается выжимкой: короткое резюме, разделы по темам и открытые вопросы. Конкретику модель сохраняет — суммы, даты, кто что обещал.</p>
+      <ul class="points">
+        <li><span class="ic">✓</span><span><b>«Действия».</b> Задачи встречи со сроком и ответственным. Предложенные моделью подтверждаете ✓ или отклоняете ✕ — подтверждённые попадают в «Задачи».</span></li>
+        <li><span class="ic">⏱</span><span><b>Метка времени у пункта.</b> Щёлкнули — открылось это место в стенограмме: можно проверить, как было сказано на самом деле.</span></li>
+        <li><span class="ic">≡</span><span><b>Главы.</b> Длинная запись делится на темы, оглавление — сбоку стенограммы.</span></li>
+        <li><span class="ic">↗</span><span><b>Поделиться.</b> Выжимку с задачами можно скопировать для Telegram или сохранить файлом <code>.md</code>.</span></li>
+        <li><span class="ic">✎</span><span><b>Заметки к встрече.</b> Повестку и вопросы пишите заранее или по ходу — в выжимке будет, что на них ответили, а что не обсудили.</span></li>
+      </ul>
+    </div>
+    <div class="mac compact reveal" role="img" aria-label="Блок «Действия» и выжимка встречи с метками времени">
+      <div class="lights"><i></i><i></i><i></i></div>
+      <div class="sheet">
+        <div class="content">
+          <div class="actions"><h6>Действия</h6>
+            <div class="act ok hi"><span class="box"></span><div><span class="tt">Подготовить тексты для лендинга</span><span class="mm">· пт, 30 окт. · Вы</span> <span class="cite">05:52</span></div><div class="btns"></div></div>
+            <div class="act ok"><span class="box"></span><div><span class="tt">Сдать макеты лендинга</span><span class="mm">· чт, 29 окт. · Анна Котова <span class="tg">#сайт</span></span> <span class="cite">04:12</span></div><div class="btns"></div></div>
+            <div class="act"><span class="box"></span><div><span class="tt">Запустить рекламную кампанию</span><span class="mm">· 3 нояб. · Иван Петров <span class="tg">#маркетинг</span></span> <span class="cite">12:03</span></div><div class="btns"><i class="hot">✓</i><i>✕</i></div></div>
+            <div class="addtask"><span>+</span>Добавить задачу — @исполнитель, !важность, срок</div>
+          </div>
+          <div class="md">
+            <p>Запуск лендинга назначили на вторник, 3 ноября. Рекламу Иван запускает сразу после релиза. <span class="cite">05:40</span></p>
+            <h5>Реклама</h5>
+            <ul><li>Бюджет 150 000 ₽, кампания стартует после релиза <span class="cite">12:03</span></li></ul>
+            <h5>Открытые вопросы и следующие шаги</h5>
+            <ul><li>Аналитику на лендинг ставим до релиза — не решили <span class="cite">12:20</span></li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Кто говорит -->
+<section class="block">
+  <div class="wrap split flip">
+    <div class="copy reveal">
+      <div class="kicker">Кто говорит</div>
+      <h2>Стенограмма по голосам, с именами</h2>
+      <p class="sub">Бриф делит запись по голосам. Незнакомый голос получает метку «Спикер 2» — назовите его один раз, и на следующих встречах Бриф узнает его сам.</p>
+      <ul class="points">
+        <li><span class="ic">◉</span><span><b>Имена из окна звонка.</b> В Zoom, Google Meet и Яндекс Телемосте спикер получает имя того, чья плитка подсвечивалась, пока он говорил. Нужно разрешение «Универсальный доступ».</span></li>
+        <li><span class="ic">👤</span><span><b>Люди.</b> Участники встреч — в одном списке, с частотой встреч и профилем человека.</span></li>
+        <li><span class="ic">⌕</span><span><b>Только его реплики.</b> Правый клик по спикеру — в стенограмме останется только он.</span></li>
+      </ul>
+    </div>
+    <div class="mac compact reveal" role="img" aria-label="Стенограмма, разделённая по голосам и главам">
+      <div class="lights"><i></i><i></i><i></i></div>
+      <div class="sheet">
+        <div class="content">
+          <div class="chap"><span class="ct">04:08</span><b>Сроки запуска</b></div>
+          <div class="tr"><div class="who" style="color:var(--sp1)">Вы <span class="ts">04:08</span></div><div class="txt">Давайте по срокам: когда покажем лендинг?</div></div>
+          <div class="tr"><div class="who" style="color:var(--sp2)">Анна Котова <span class="ts">04:12</span></div><div class="txt">Макеты будут к четвергу, вёрстка — ещё два дня.</div></div>
+          <div class="tr"><div class="who" style="color:var(--sp1)">Вы <span class="ts">05:40</span></div><div class="txt">Тогда релиз во вторник, третьего ноября.</div></div>
+          <div class="chap"><span class="ct">12:03</span><b>Реклама</b></div>
+          <div class="tr"><div class="who" style="color:var(--sp4)">Иван Петров <span class="ts">12:03</span></div><div class="txt">Бюджет на рекламу — сто пятьдесят тысяч, кампанию запускаю сразу после релиза.</div></div>
+          <div class="tr"><div class="who" style="color:var(--sp3)">Спикер 4 <span class="ts">12:20</span></div><div class="txt">А аналитику на лендинг ставим до релиза?</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Приватность -->
+<section class="block" id="privacy">
+  <div class="wrap center">
+    <div class="kicker">Приватность</div>
+    <h2>Звук остаётся на вашем Mac</h2>
+    <p class="sub">Запись и распознавание речи работают на компьютере. Наружу уходит только то, что вы сами подключили.</p>
+    <div class="privacy" style="text-align:left">
+      <div class="zone reveal">
+        <h3>На вашем Mac <span class="tag">всегда</span></h3>
+        <ul>
+          <li>Аудиозаписи встреч</li>
+          <li>Распознавание речи (WhisperKit, Neural Engine) и деление по голосам</li>
+          <li>Голосовые профили, встречи, люди, задачи</li>
+          <li>Ключи API и токены — в Связке ключей macOS</li>
+        </ul>
+      </div>
+      <div class="flow reveal"><span>только текст<br>стенограммы</span><div class="pipe"></div><span>если подключили</span></div>
+      <div class="zone cloud reveal">
+        <h3>Наружу <span class="tag">по вашему выбору</span></h3>
+        <ul>
+          <li>Текст стенограммы — модели для выжимки, которую выбрали вы: DeepSeek, OpenAI, OpenRouter, Yandex AI Studio, Groq или Claude/Codex. С Ollama или LM Studio текст тоже не покидает Mac</li>
+          <li>Запросы к календарю и видеосервисам — если подключили Google или Яндекс Телемост</li>
+          <li>Данные для iPhone — зашифрованными, посредник видит только шифротекст</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Встреча голосом -->
+<section class="block" id="voice">
+  <div class="wrap split">
+    <div class="copy reveal">
+      <div class="kicker">До встречи</div>
+      <h2>Продиктуйте встречу — Бриф создаст событие и ссылку</h2>
+      <p class="sub">Нажмите ⌥⌘N в любом приложении и скажите, что нужно. Бриф сам поймёт, встреча это, задача или новый контакт, и заполнит карточку. Проверили поля — ⏎.</p>
+      <ul class="points">
+        <li><span class="ic">📅</span><span><b>Встреча</b> — событие в Google Calendar со ссылкой Google Meet или Яндекс Телемоста. Ссылка сразу в буфере обмена.</span></li>
+        <li><span class="ic">✓</span><span><b>Задача</b> — со сроком, ответственным и важностью. Двойное нажатие клавиши — ввод текстом: «позвонить клиенту завтра в 11 !высокий @Иван».</span></li>
+        <li><span class="ic">⌨</span><span><b>Разбор команды — на компьютере</b> по умолчанию, в сеть ничего не уходит. Можно включить Ollama или модель по API.</span></li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <div class="scene-tabs" id="voice-tabs" role="tablist" aria-label="Что можно продиктовать">
+        <button type="button">Встреча<i class="prog"></i></button>
+        <button type="button">Задача<i class="prog"></i></button>
+        <button type="button">Контакт<i class="prog"></i></button>
+      </div>
+      <div class="vm-stage" id="voice-stage" role="img" aria-label="Голосовая команда: плашка с волной, затем карточка встречи, задачи или контакта и готовое событие со ссылкой">
+        <div class="kbd"><kbd>⌥</kbd><kbd>⌘</kbd><kbd>N</kbd></div>
+        <div class="vpill"><span class="rdot"></span><span class="wave"></span><span class="tm">0:03</span><span class="recb"></span><span class="busy"><span class="spin"></span>Разбираю…</span><span class="x">✕</span></div>
+        <div class="card-vm show">
+          <div class="okh">Встреча создана</div>
+          <div class="ttl">Созвон с Иваном</div>
+          <div class="sub2">29 октября 2026, 15:00 · 1 ч · Иван Петров</div>
+          <div class="linkbox"><span style="color:var(--accent)">▶</span><span class="u">https://meet.g…/xpd-qmrw-ken</span><span>Скопировано</span><span>Открыть</span></div>
+          <div class="note">Ссылка на Google Meet в буфере обмена — можно вставлять в чат.</div>
+          <div class="foot"><span class="re">Открыть в календаре</span><span class="go">Готово</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Что ещё -->
+<section class="block tight">
+  <div class="wrap">
+    <div class="center"><div class="kicker">Что ещё</div><h2>Всё о встречах — в одном окне</h2></div>
+    <div class="grid">
+      <div class="card reveal"><div class="em">📅</div><b>Календарь</b><span>Google и iCloud через календарь macOS. Ближайшая встреча — в строке меню, на старте — уведомление с кнопкой записи.</span></div>
+      <div class="card reveal"><div class="em">🔎</div><b>Поиск и вопрос к встрече</b><span>Поиск по названию, участникам, тегам и выжимке. Или спросите встречу словами — ответ со ссылкой на место в стенограмме.</span></div>
+      <div class="card reveal"><div class="em">✅</div><b>Задачи</b><span>Быстрый ввод из любого приложения, напоминания в срок, утренняя сводка. Перед встречей — открытые задачи с её участниками.</span></div>
+      <div class="card reveal"><div class="em">🧠</div><b>Любая модель для выжимки</b><span>DeepSeek, OpenAI, OpenRouter, Yandex AI Studio, Groq, LM Studio, локальная Ollama или Claude/Codex через подписку.</span></div>
+      <div class="card reveal"><div class="em">🏷️</div><b>Теги</b><span>Цветные теги с описанием. Модель сама ставит встрече и задачам подходящие из уже созданных.</span></div>
+      <div class="card reveal"><div class="em">🗄</div><b>Копия на своём сервере</b><span>Каждая встреча — файлом <code>.md</code> на WebDAV: Nextcloud, Synology, Яндекс Диск. Аудио остаётся на Mac.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. iPhone -->
+<section class="block">
+  <div class="wrap split flip">
+    <div class="copy reveal">
+      <div class="kicker">На iPhone</div>
+      <h2>Встречи и задачи — в кармане</h2>
+      <p class="sub">Бриф на iPhone открывается с экрана «Домой»: встречи, выжимки, стенограммы, задачи и люди. Задачи и заметки можно править, без связи правки подождут.</p>
+      <ul class="points">
+        <li><span class="ic">🔔</span><span><b>Уведомления</b> о сроках задач и готовой выжимке (iOS 16.4 и новее).</span></li>
+        <li><span class="ic">🔒</span><span><b>Данные остаются на Mac</b> и идут на телефон зашифрованными. Подключение — по QR-коду из настроек.</span></li>
+        <li><span class="ic">💻</span><span><b>Нужен включённый Mac.</b> Телефон показывает данные с компьютера: пока Mac спит, нового не будет.</span></li>
+      </ul>
+    </div>
+    <div class="phone reveal" id="phone" role="img" aria-label="Бриф на iPhone: уведомление о готовой выжимке и список задач">
+      <div class="scr">
+        <div class="notch"></div>
+        <div class="notif"><img src="assets/icon.png" alt=""><div><b>Бриф</b><br>Выжимка готова: «Запуск лендинга»</div></div>
+        <div class="ph">Задачи</div>
+        <div class="pc task"><span class="box"></span><div><div class="t">Подготовить тексты для лендинга</div><div class="m">Пт, 30 окт. · Запуск лендинга</div></div></div>
+        <div class="pc task"><span class="box"></span><div><div class="t">Сдать макеты лендинга</div><div class="m">Чт, 29 окт. · Анна Котова</div></div></div>
+        <div class="pc task"><span class="box"></span><div><div class="t">Позвонить клиенту</div><div class="m">Завтра, 11:00 · Иван Петров</div></div></div>
+        <div class="ph" style="font-size:17px;margin-top:16px">Встречи</div>
+        <div class="pc"><b>Запуск лендинга</b><div class="m">Сегодня, 11:00 · 32 мин</div></div>
+        <div class="tabbar"><span>Встречи</span><span class="on">Задачи</span><span>Люди</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. Установка -->
+<section class="block" id="install">
+  <div class="wrap">
+    <div class="center"><div class="kicker">Установка</div><h2>Три шага до первой записи</h2>
+      <p class="sub">Бриф не проверен Apple: у приложения пока нет платной подписи разработчика. Поэтому при первом запуске macOS спросит, точно ли его открыть.</p></div>
+    <div class="install">
+      <div class="card reveal"><div class="em">1</div><b>Скачайте и перетащите</b><span>Откройте скачанный <code>Brif-….dmg</code> и перетащите «Бриф» в «Программы».</span></div>
+      <div class="card reveal"><div class="em">2</div><b>Разрешите запуск</b><span><b style="display:inline">macOS 15 и новее:</b> откройте Бриф, закройте предупреждение, затем «Системные настройки → Конфиденциальность и безопасность» → внизу «Всё равно открыть».<br><br><b style="display:inline">macOS 14:</b> правый клик по «Бриф» в «Программах» → «Открыть» → «Открыть».</span></div>
+      <div class="card reveal"><div class="em">3</div><b>Выдайте разрешения</b><span>Микрофон, «Запись экрана» — для звука звонка (после неё перезапустите Бриф), календарь, контакты, уведомления. Все статусы — «Настройки → Разрешения».</span></div>
+    </div>
+    <div class="req">
+      <span>macOS 14 Sonoma или новее</span><span>Mac на Apple Silicon (M1 и новее)</span><span>≈2–4 ГБ на модели распознавания</span><span>Интерфейс на русском</span>
+    </div>
+    <p class="btn-note center">При первом запуске Бриф скачает модель распознавания (≈1,6 ГБ) и подготовит её под Neural Engine — первая обработка займёт дольше обычной. Обновления приходят сами: «Бриф → Проверить обновления…».</p>
+  </div>
+</section>
+
+<!-- 11. Вопросы -->
+<section class="block tight" id="faq">
+  <div class="wrap">
+    <div class="center"><div class="kicker">Вопросы</div><h2>Частые вопросы</h2></div>
+    <div class="faq">
+      <details><summary>Сколько стоит?</summary><p>Сейчас Бриф бесплатный. Если для выжимки вы выберете платную модель по API (например, OpenAI или DeepSeek), её оплачиваете у поставщика модели напрямую, по их тарифам. С Ollama или LM Studio выжимка считается на вашем Mac.</p></details>
+      <details><summary>Какие звонки можно записать?</summary><p>Любые, где звук идёт через Mac: Zoom, Google Meet, Яндекс Телемост, Teams, Telegram и другие. Бриф пишет системный звук (собеседников) и ваш микрофон. Имена спикеров по окну звонка подтягиваются в Zoom, Google Meet и Яндекс Телемосте.</p></details>
+      <details><summary>Работает ли без интернета?</summary><p>Запись, расшифровка и деление по голосам работают без интернета. Для выжимки нужна модель: облачной — нужен интернет, локальной (Ollama, LM Studio) — нет.</p></details>
+      <details><summary>У меня Mac на Intel. Заработает?</summary><p>Нет. Бриф собран для Mac на Apple Silicon (M1 и новее): распознавание речи использует Neural Engine этих процессоров. Проверить свой Mac: меню  → «Об этом Mac» → строка «Чип».</p></details>
+      <details><summary>А для Windows или только iPhone?</summary><p>Нет. Бриф — приложение для macOS. Версия для iPhone дополняет Mac: показывает его встречи и задачи и без Mac не работает.</p></details>
+      <details><summary>macOS пишет, что приложение не удалось проверить</summary><p>Так macOS встречает приложения без платной подписи Apple. Откройте «Системные настройки → Конфиденциальность и безопасность», внизу будет сообщение про «Бриф» и кнопка «Всё равно открыть». Это нужно сделать один раз.</p></details>
+      <details><summary>Google пишет «Google не проверил это приложение»</summary><p>Подключение Google (Meet и контакты) пока не прошло проверку Google. Нажмите «Дополнительно» → «Перейти на страницу…», чтобы продолжить. Бриф получает доступ только к событиям ваших календарей, контактам и созданным им комнатам Meet. Без Google Бриф тоже работает: календарь берётся из macOS, ссылку на встречу можно вставить свою или создать в Телемосте.</p></details>
+      <details><summary>Нужно ли предупреждать собеседников о записи?</summary><p>Да, предупредите участников, что встреча записывается. Это вежливо, а в некоторых странах и компаниях — обязательно.</p></details>
+      <details><summary>Как удалить Бриф и все данные?</summary><p>Данные лежат в <code>~/Library/Application Support/Стенограф/</code>, экспорт — в <code>~/Documents/Бриф/</code>, секреты — в Связке ключей. Удалить всё разом можно в настройках приложения, затем перетащить «Бриф» из «Программ» в корзину.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 12. Финал -->
+<section class="final">
+  <div class="wrap">
+    <img src="assets/icon.png" alt="">
+    <h2>Следующий созвон — уже с выжимкой</h2>
+    <p class="sub">Скачайте Бриф, выдайте разрешения и нажмите «Новая запись» перед звонком. Выжимка и задачи появятся в окне встречи после её окончания.</p>
+    <div class="cta">
+      <a class="btn mac-only" data-download href="https://github.com/23brezhnev/brif-releases/releases/latest">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>
+        Скачать для Mac
+      </a>
+      <div class="not-mac" hidden><button class="btn" type="button" data-copy>Скопировать ссылку на страницу</button></div>
+    </div>
+    <p class="btn-note mac-only">macOS 14+ · Apple Silicon · <span data-version>бесплатно</span></p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Бриф — приложение для встреч на macOS</span>
+    <span><a href="https://github.com/23brezhnev/brif-releases/releases">Все выпуски и что нового</a> · <a href="https://github.com/23brezhnev/brif-releases/issues">Сообщить о проблеме</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
