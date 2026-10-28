@@ -401,8 +401,8 @@ footer a { color: var(--text-2); }
 .caption { text-align: center; color: var(--text-2); font-size: 15px; margin-top: 16px; min-height: 24px; }
 
 /* Появление при прокрутке */
-.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
-.reveal.in { opacity: 1; transform: none; }
+.js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+.js .reveal.in { opacity: 1; transform: none; }
 
 /* ---------- Адаптивность ---------- */
 @media (max-width: 980px) {
@@ -429,7 +429,7 @@ footer a { color: var(--text-2); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; }
 }
 

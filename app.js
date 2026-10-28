@@ -167,7 +167,7 @@ function heroScenes(win) {
   // Уровень звука в полосе записи.
   const lvl = $('.lvl', strip);
   for (let i = 0; i < 22; i++) lvl.append(document.createElement('i'));
-  setInterval(() => { if (!strip.hidden) $$('i', lvl).forEach((b) => (b.style.height = 15 + Math.random() * 85 + '%')); }, 140);
+  setInterval(() => { if (!strip.hidden && !document.hidden && !reduced) $$('i', lvl).forEach((b) => (b.style.height = 15 + Math.random() * 85 + '%')); }, 140);
 
   return [
     {
@@ -353,7 +353,7 @@ function voiceScenes(stage) {
   const wave = $('.wave', pill), tm = $('.tm', pill);
   for (let i = 0; i < 40; i++) wave.append(document.createElement('i'));
   let talking = false;
-  setInterval(() => { $$('i', wave).forEach((b) => (b.style.height = (talking ? 12 + Math.random() * 88 : 10) + '%')); }, 110);
+  setInterval(() => { if (!talking && wave.dataset.idle) return; wave.dataset.idle = talking ? '' : '1'; $$('i', wave).forEach((b) => (b.style.height = (talking ? 12 + Math.random() * 88 : 10) + '%')); }, 110);
   return VOICE.map((v) => ({
     hold: 2600,
     async run(w) {
